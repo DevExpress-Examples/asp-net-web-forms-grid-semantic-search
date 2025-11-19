@@ -21,23 +21,18 @@ namespace ASPxGridViewAIIntegration
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            if (_originalEntries == null)
-            {
+            if (_originalEntries == null) {
                 _originalEntries = GenerateData();
+            }
+
+            ASPxGridView1.DataSource = _originalEntries;
+            if (!IsPostBack) { 
+                ASPxGridView1.DataBind();
             }
 
             var embeddingGenerator = (IEmbeddingGenerator<string, Embedding<float>>)Application["EmbeddingGenerator"];
 
             _filterProvider = new SmartFilterProvider(embeddingGenerator);
-        }
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!IsPostBack && !IsCallback)
-            {
-                ASPxGridView1.DataSource = _originalEntries;
-                ASPxGridView1.DataBind();
-            }
         }
 
         protected async void CallbackPanel_Callback(object sender, CallbackEventArgsBase e)
