@@ -35,7 +35,7 @@ namespace ASPxGridViewAIIntegration
             _filterProvider = new SmartFilterProvider(embeddingGenerator);
         }
 
-        protected async void CallbackPanel_Callback(object sender, CallbackEventArgsBase e)
+        protected void CallbackPanel_Callback(object sender, CallbackEventArgsBase e)
         {
             var payload = JsonSerializer.Deserialize<CallbackPayload>(e.Parameter);
             var searchText = (payload?.search ?? string.Empty).Trim();
@@ -51,14 +51,7 @@ namespace ASPxGridViewAIIntegration
             var descriptions = _originalEntries.Select(x => $"{x.Name} - {x.Description}").ToList();
             descriptions.Add(searchText);
 
-            try
-            {
-                await _filterProvider.FillCacheAsync(descriptions);
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException(ex.Message);
-            }
+            _filterProvider.FillCache(descriptions);
 
             var ranked = _originalEntries
                 .Select(item => new

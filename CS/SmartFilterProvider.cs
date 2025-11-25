@@ -13,15 +13,14 @@ namespace ASPxGridViewAIIntegration
     public class SmartFilterProvider
     {
         private readonly IEmbeddingGenerator<string, Embedding<float>> Embedder;
-        private static readonly ConcurrentDictionary<string, Embedding<float>> _cache =
-            new ConcurrentDictionary<string, Embedding<float>>(StringComparer.OrdinalIgnoreCase);
+        private static readonly ConcurrentDictionary<string, Embedding<float>> _cache = new ConcurrentDictionary<string, Embedding<float>>(StringComparer.OrdinalIgnoreCase);
 
         public SmartFilterProvider(IEmbeddingGenerator<string, Embedding<float>> embedder)
         {
             Embedder = embedder;
         }
 
-        public async Task FillCacheAsync(IEnumerable<string> words)
+        public void FillCache(IEnumerable<string> words)
         {
             var distinct = words?.Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x.Trim()).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
             if (distinct == null || distinct.Length == 0) return;
@@ -29,7 +28,7 @@ namespace ASPxGridViewAIIntegration
             var nonCached = distinct.Where(x => !_cache.ContainsKey(x)).ToArray();
             if (!nonCached.Any()) return;
 
-            var embeddings = await Embedder.GenerateAsync(nonCached);
+            var embeddings = Embedder.GenerateAsync(nonCached).GetAwaiter().GetResult();
             int i = 0;
             foreach (var emb in embeddings)
             {
