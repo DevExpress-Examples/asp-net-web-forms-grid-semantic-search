@@ -1,15 +1,10 @@
 ﻿using ASPxGridViewAIIntegration.Models;
-using Azure.AI.OpenAI;
-using DevExpress.AIIntegration;
-using DevExpress.AIIntegration.OpenAI;
 using DevExpress.Web;
 using Microsoft.Extensions.AI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace ASPxGridViewAIIntegration
@@ -21,12 +16,14 @@ namespace ASPxGridViewAIIntegration
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            if (_originalEntries == null) {
+            if (_originalEntries == null)
+            {
                 _originalEntries = GenerateData();
             }
 
             ASPxGridView1.DataSource = _originalEntries;
-            if (!IsPostBack) { 
+            if (!IsPostBack)
+            {
                 ASPxGridView1.DataBind();
             }
 
@@ -35,9 +32,9 @@ namespace ASPxGridViewAIIntegration
             _filterProvider = new SmartFilterProvider(embeddingGenerator);
         }
 
-        protected void CallbackPanel_Callback(object sender, CallbackEventArgsBase e)
+        protected void ASPxGridView1_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e)
         {
-            var payload = JsonSerializer.Deserialize<CallbackPayload>(e.Parameter);
+            var payload = JsonSerializer.Deserialize<CallbackPayload>(e.Parameters);
             var searchText = (payload?.search ?? string.Empty).Trim();
             var similarity = payload?.similarity;
 
