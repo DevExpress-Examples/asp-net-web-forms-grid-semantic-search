@@ -1,12 +1,9 @@
-﻿using Azure.AI.OpenAI;
-using Microsoft.Extensions.AI;
+﻿using Microsoft.Extensions.AI;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics.Tensors;
-using System.Threading.Tasks;
-using System.Web;
 
 namespace ASPxGridViewAIIntegration
 {
