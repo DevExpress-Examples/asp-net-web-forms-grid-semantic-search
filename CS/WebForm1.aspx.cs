@@ -7,54 +7,46 @@ using System.Linq;
 using System.Text.Json;
 using System.Web.UI.WebControls;
 
-namespace ASPxGridViewAIIntegration
-{
-    public partial class WebForm1 : System.Web.UI.Page
-    {
-        private static List<DictionaryEntry> _originalEntries;
-        private SmartFilterProvider _filterProvider;
+namespace ASPxGridViewAIIntegration {
+    public partial class WebForm1 : System.Web.UI.Page {
+        private static List<DictionaryEntry> originalEntries;
+        private SmartFilterProvider filterProvider;
 
-        protected void Page_Init(object sender, EventArgs e)
-        {
-            if (_originalEntries == null)
-            {
-                _originalEntries = GenerateData();
+        protected void Page_Init(object sender, EventArgs e) {
+            if(originalEntries == null) {
+                originalEntries = GenerateData();
             }
 
-            ASPxGridView1.DataSource = _originalEntries;
-            if (!IsPostBack)
-            {
+            ASPxGridView1.DataSource = originalEntries;
+            if(!IsPostBack) {
                 ASPxGridView1.DataBind();
             }
 
             var embeddingGenerator = (IEmbeddingGenerator<string, Embedding<float>>)Application["EmbeddingGenerator"];
 
-            _filterProvider = new SmartFilterProvider(embeddingGenerator);
+            filterProvider = new SmartFilterProvider(embeddingGenerator);
         }
 
-        protected void ASPxGridView1_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e)
-        {
+        protected void ASPxGridView1_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e) {
             var payload = JsonSerializer.Deserialize<CallbackPayload>(e.Parameters);
-            var searchText = (payload?.search ?? string.Empty).Trim();
-            var similarity = payload?.similarity;
+            var searchText = (payload?.Search ?? string.Empty).Trim();
+            var similarity = payload?.Similarity;
 
-            if (string.IsNullOrEmpty(searchText))
-            {
-                ASPxGridView1.DataSource = _originalEntries;
+            if(string.IsNullOrEmpty(searchText)) {
+                ASPxGridView1.DataSource = originalEntries;
                 ASPxGridView1.DataBind();
                 return;
             }
 
-            var descriptions = _originalEntries.Select(x => $"{x.Name} - {x.Description}").ToList();
+            var descriptions = originalEntries.Select(x => $"{x.Name} - {x.Description}").ToList();
             descriptions.Add(searchText);
 
-            _filterProvider.FillCache(descriptions);
+            filterProvider.FillCache(descriptions);
 
-            var ranked = _originalEntries
-                .Select(item => new
-                {
+            var ranked = originalEntries
+                .Select(item => new {
                     Item = item,
-                    Similarity = _filterProvider.GetSimilarity($"{item.Name} - {item.Description}", searchText)
+                    Similarity = filterProvider.GetSimilarity($"{item.Name} - {item.Description}", searchText)
                 })
                 .OrderByDescending(x => x.Similarity)
                 .Where(x => x.Similarity > similarity)
@@ -65,10 +57,9 @@ namespace ASPxGridViewAIIntegration
             ASPxGridView1.DataBind();
         }
 
-        class CallbackPayload { public string search { get; set; } public float similarity { get; set; } }
+        class CallbackPayload { public string Search { get; set; } public float Similarity { get; set; } }
 
-        public List<DictionaryEntry> GenerateData()
-        {
+        public List<DictionaryEntry> GenerateData() {
             return new List<DictionaryEntry>
             {
                 new DictionaryEntry(1, "Car", "A vehicle with four wheels"),
