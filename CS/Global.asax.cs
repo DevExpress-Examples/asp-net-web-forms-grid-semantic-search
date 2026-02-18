@@ -14,9 +14,13 @@ namespace ASPxGridViewAIIntegration {
                 DevExpress.Security.Resources.UrlAccessRule.Allow()
             );
 
-            var credentials = new ApiKeyCredential("DEMO");
+            // Replace with your endpoint, API key, and deployed AI model name.
+            var azureOpenAIEndpoint = Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT");
+            var azureOpenAIKey = Environment.GetEnvironmentVariable("AZURE_OPENAI_API_KEY");
+
+            var credentials = new ApiKeyCredential(azureOpenAIKey);
             var openAI = new AzureOpenAIClient(
-                new Uri("https://public-api.devexpress.com/demo-openai"),
+                new Uri(azureOpenAIEndpoint),
                 credentials
             );
 
