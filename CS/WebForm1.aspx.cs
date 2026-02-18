@@ -5,20 +5,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Web.UI.WebControls;
 
-namespace ASPxGridViewAIIntegration {
-    public partial class WebForm1 : System.Web.UI.Page {
+namespace ASPxGridViewAIIntegration
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
         private static List<DictionaryEntry> originalEntries;
         private SmartFilterProvider filterProvider;
 
-        protected void Page_Init(object sender, EventArgs e) {
-            if(originalEntries == null) {
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            if (originalEntries == null)
+            {
                 originalEntries = GenerateData();
             }
 
             ASPxGridView1.DataSource = originalEntries;
-            if(!IsPostBack) {
+            if (!IsPostBack)
+            {
                 ASPxGridView1.DataBind();
             }
 
@@ -27,12 +33,14 @@ namespace ASPxGridViewAIIntegration {
             filterProvider = new SmartFilterProvider(embeddingGenerator);
         }
 
-        protected void ASPxGridView1_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e) {
+        protected void ASPxGridView1_CustomCallback(object sender, ASPxGridViewCustomCallbackEventArgs e)
+        {
             var payload = JsonSerializer.Deserialize<CallbackPayload>(e.Parameters);
             var searchText = (payload?.Search ?? string.Empty).Trim();
             var similarity = payload?.Similarity;
 
-            if(string.IsNullOrEmpty(searchText)) {
+            if (string.IsNullOrEmpty(searchText))
+            {
                 ASPxGridView1.DataSource = originalEntries;
                 ASPxGridView1.DataBind();
                 return;
@@ -57,9 +65,17 @@ namespace ASPxGridViewAIIntegration {
             ASPxGridView1.DataBind();
         }
 
-        class CallbackPayload { public string Search { get; set; } public float Similarity { get; set; } }
+        class CallbackPayload 
+        {
+            [JsonPropertyName("search")]
+            public string Search { get; set; }
 
-        public List<DictionaryEntry> GenerateData() {
+            [JsonPropertyName("similarity")]
+            public float Similarity { get; set; } 
+        }
+
+        public List<DictionaryEntry> GenerateData()
+        {
             return new List<DictionaryEntry>
             {
                 new DictionaryEntry(1, "Car", "A vehicle with four wheels"),
