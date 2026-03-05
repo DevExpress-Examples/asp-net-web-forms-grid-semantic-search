@@ -81,7 +81,7 @@ This function sends a JSON payload with the search text and similarity threshold
 [WebForm1.aspx.cs](CS/WebForm1.aspx.cs) initializes the data source and handles semantic search requests in the `CustomCallback` event:
 
 1. Deserializes the callback payload to get the search text and similarity threshold.
-2. Combines each item's `Name` and `Description` for semantic matching.
+2. Concatenates each item's `Name` and `Description`  to create a single string for semantic matching.
 3. Generates embeddings for all texts and caches them in the `SmartFilterProvider`.
 4. Computes cosine similarity between each item and the query.
 5. Filters items where similarity is greater than the threshold.
