@@ -7,8 +7,6 @@
 
 This example incorporates AI-powered semantic search into ASP.NET Web Forms [Grid View](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxGridView). Unlike traditional keyword matching, semantic search leverages Natural Language Processing (NLP) to understand the intent behind a query and deliver more relevant answers.
 
-Use our cross-platform [AI extensions](https://docs.devexpress.com/CoreLibraries/405204/ai-powered-extensions) to connect your application to AI services. Once integrated, you can add custom controls to the `ASPxGridView` toolbar to manage and apply semantic filters.
-
 ![Semantic Search in ASP.NET Grid View](semantic-search.gif)
 
 ## Register an AI Service
@@ -34,9 +32,9 @@ At [startup](CS/Global.asax.cs), the application instantiates an [Azure OpenAI](
 The embedding generator is a specialized AI model that translates text into a list of numbers called a _vector_. Its primary purpose is to mathematically compare the meaning of data rather than just matching literal keywords.
 
 ```csharp
-var credentials = new ApiKeyCredential("DEMO");
+var credentials = new ApiKeyCredential(azureOpenAIKey);
 var openAI = new AzureOpenAIClient(
-    new Uri("https://public-api.devexpress.com/demo-openai"),
+    new Uri(azureOpenAIEndpoint),
     credentials
 );
 
