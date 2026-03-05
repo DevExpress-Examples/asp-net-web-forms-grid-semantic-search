@@ -24,10 +24,6 @@ namespace ASPxGridViewAIIntegration {
                 credentials
             );
 
-            IChatClient chatClient = openAI
-                .GetChatClient("gpt-4o-mini")
-                .AsIChatClient();
-
             var embeddingGenerator = openAI
                 .GetEmbeddingClient("text-embedding-3-small")
                 .AsIEmbeddingGenerator();
