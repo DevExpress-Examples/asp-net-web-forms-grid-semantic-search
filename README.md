@@ -49,7 +49,7 @@ It is also possible to use a different Azure OpenAI embeddings deployment. Chang
 
 ### Implement a Smart Filter Provider
 
-The `SmartFilterProvider` [class](CS/SmartFilterProvider.cs) manages embedding generation and similarity calculations.
+The [SmartFilterProvider](CS/SmartFilterProvider.cs) class manages embedding generation and similarity calculations.
 
 - `SmartFilterProvider` constructor: Stores the [embedding generator](https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.ai.iembeddinggenerator) instance for later use.
 - `FillCache`: Normalizes and de-duplicates user input. It implements static caching to prevent redundant generation of embeddings for the same text.
