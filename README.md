@@ -64,7 +64,7 @@ Users can submit semantic search queries using two controls within the [grid too
 - [ASPxTextBox](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxTextBox): Allows users to enter search queries.
 - [ASPxSpinEdit](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxSpinEdit): Adjusts the similarity threshold.
 
-These controls trigger the `onSearchChanged` JavaScript function when their values change:
+These controls trigger the `onSearchChanged` JavaScript function when their values change. This function sends a JSON payload with the search text and similarity threshold to the server via the grid's `PerformCallback` method.
 
 ```javascript
 function onSearchChanged(s, e) {
@@ -72,9 +72,6 @@ function onSearchChanged(s, e) {
     const sim = similaritySpin.GetValue();
     grid.PerformCallback(JSON.stringify({ search: text, similarity: sim }));
 }
-```
-
-This function sends a JSON payload with the search text and similarity threshold to the server via the grid's `PerformCallback` method.
 
 ### Implement Server-Side Semantic Search
 
