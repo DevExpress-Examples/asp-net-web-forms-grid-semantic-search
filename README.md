@@ -97,7 +97,7 @@ Press <kbd>F5</kbd> to run the application. If you encounter an _HTTP Error 403.
     - Move toward _1_ (strict) for exact matches only. You will only see results that mean almost exactly what you typed.
     - Move toward _0_ (loose) to explore more options, even if they use different words.
 
-The grid refreshes automatically with filtered, ranked results.
+The grid refreshes automatically with filtered results ranked by similarity score.
 
 ## Files to Review
 
