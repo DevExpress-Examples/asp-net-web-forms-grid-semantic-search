@@ -90,7 +90,7 @@ This function sends a JSON payload with the search text and similarity threshold
 
 ## Run the Solution
 
-Press <kbd>F5</kbd> to run the application. The browser will open to display the grid and search toolbar. If you encounter an _HTTP Error 403.14 - Forbidden_, append `/WebForm1.aspx` to the URL.
+Press <kbd>F5</kbd> to run the application. If you encounter an _HTTP Error 403.14 - Forbidden_, append `/WebForm1.aspx` to the URL.
 
 - Enter a query and press <kbd>Enter</kbd> to perform a semantic search.
 - Change **Similarity Factor** to refine your search:
