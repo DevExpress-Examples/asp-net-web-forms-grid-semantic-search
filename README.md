@@ -86,7 +86,7 @@ This function sends a JSON payload with the search text and similarity threshold
 4. Computes cosine similarity between each item and the query.
 5. Filters items where similarity is greater than the threshold.
 6. Orders results by similarity (most relevant first).
-7. Updates the grid data source with filtered results.
+7. Updates the grid data source.
 
 ## Run the Solution
 
