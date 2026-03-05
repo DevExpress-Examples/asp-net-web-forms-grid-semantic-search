@@ -27,7 +27,7 @@ In addition, your Azure OpenAI subscription must have **text-embedding-3-small**
 
 ### Initialize AI Services
 
-At [startup](CS/Global.asax.cs), the application instantiates an [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-foundry/models/openai/) embedding generator (**text-embedding-3-small**) and stores it in the Application state for reuse throughout the app lifecycle.
+At [startup](CS/Global.asax.cs), the application instantiates an [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-foundry/models/openai/) embedding generator (**text-embedding-3-small**) and stores it in the Application state to reuse during the app lifecycle.
 
 The embedding generator is a specialized AI model that translates text into a list of numbers called a _vector_. Its primary purpose is to mathematically compare the meaning of data rather than just matching literal keywords.
 
