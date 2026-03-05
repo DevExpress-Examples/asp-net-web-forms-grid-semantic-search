@@ -59,7 +59,7 @@ The [SmartFilterProvider](CS/SmartFilterProvider.cs) class manages embedding gen
 
 The [WebForm1.aspx](CS/WebForm1.aspx) page features a [grid control](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxGridView) populated with sample data. This data is generated in [WebForm1.aspx.cs](CS/WebForm1.aspx.cs) by the `GenerateData()` method as an in-memory `List<DictionaryEntry>`.
 
-Users can perform semantic searches using two controls located in the [grid toolbar](https://docs.devexpress.com/AspNet/118563/components/grid-view/concepts/toolbars):
+Users can submit semantic search queries using two controls within the [grid toolbar](https://docs.devexpress.com/AspNet/118563/components/grid-view/concepts/toolbars):
 
 - [ASPxTextBox](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxTextBox): Allows users to enter search queries.
 - [ASPxSpinEdit](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxSpinEdit): Adjusts the similarity threshold.
