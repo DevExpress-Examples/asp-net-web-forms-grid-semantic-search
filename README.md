@@ -5,7 +5,7 @@
 <!-- default badges end -->
 # ASP.NET Web Forms Grid View - Semantic Search
 
-This example incorporates AI-powered semantic search into ASP.NET Web Forms [Grid View](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxGridView). Unlike traditional keyword matching, semantic search leverages Natural Language Processing (NLP) to understand the intent behind a query and deliver more relevant answers.
+This example incorporates AI-powered semantic search into the ASP.NET Web Forms [Grid View](https://docs.devexpress.com/AspNet/5823/components/grid-view) control. Unlike traditional keyword matching, semantic search leverages Natural Language Processing (NLP) to understand the intent behind a query and deliver more relevant answers.
 
 ![Semantic Search in ASP.NET Grid View](semantic-search.gif)
 
