@@ -21,7 +21,7 @@ This example uses the [Azure OpenAI](https://azure.microsoft.com/en-us/products/
 - `AZURE_OPENAI_ENDPOINT`: Your Azure OpenAI endpoint
 - `AZURE_OPENAI_API_KEY`: Your Azure OpenAI key
 
-In addition, your Azure OpenAI subscription must have deployment for the **text-embedding-3-small** embeddings model for vector search and similarity.
+In addition, your Azure OpenAI subscription must have **text-embedding-3-small** embeddings model deployed to support vector-based similarity search.
 
 ## Implementation Details
 
