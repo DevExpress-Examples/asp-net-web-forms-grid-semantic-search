@@ -72,6 +72,7 @@ function onSearchChanged(s, e) {
     const sim = similaritySpin.GetValue();
     grid.PerformCallback(JSON.stringify({ search: text, similarity: sim }));
 }
+```
 
 ### Implement Server-Side Semantic Search
 
