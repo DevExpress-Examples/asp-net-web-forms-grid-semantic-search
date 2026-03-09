@@ -17,7 +17,7 @@ To run this example, configure project dependencies and set up secure authentica
 > [!NOTE]
 > DevExpress AI-powered extensions follow the "bring your own key" principle. DevExpress does not offer a REST API and does not ship any built-in LLMs/SLMs. You need an active Azure/Open AI subscription to obtain the REST API endpoint, key, and model deployment name. These variables must be specified at application startup to register AI clients and enable DevExpress AI-powered Extensions in your application.
 
-This example uses the [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-foundry/models/openai/) service. For security, secrets are stored in the following environment variables:
+This example uses [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-foundry/models/openai/) service. For security, secrets are stored in the following environment variables:
 
 - `AZURE_OPENAI_ENDPOINT`: Your Azure OpenAI endpoint
 - `AZURE_OPENAI_API_KEY`: Your Azure OpenAI key
@@ -65,7 +65,7 @@ Users can submit semantic search queries using two controls within the [grid too
 - [ASPxTextBox](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxTextBox): Allows users to enter search queries.
 - [ASPxSpinEdit](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxSpinEdit): Adjusts the similarity threshold.
 
-These controls trigger the `onSearchChanged` JavaScript function when their values change. This function sends a JSON payload with the search text and similarity threshold to the server via the grid's `PerformCallback` method.
+These controls trigger the `onSearchChanged` JavaScript function when their values change. This function sends a JSON payload with search text and similarity threshold to the server via the grid's `PerformCallback` method.
 
 ```javascript
 function onSearchChanged(s, e) {
@@ -79,21 +79,21 @@ function onSearchChanged(s, e) {
 
 [WebForm1.aspx.cs](CS/WebForm1.aspx.cs) initializes the data source and handles semantic search requests in the `CustomCallback` event:
 
-1. Deserializes the callback payload to get the search text and similarity threshold.
-2. Concatenates each item's `Name` and `Description`  to create a single string for semantic matching.
+1. Deserializes callback payload to get search text and similarity threshold.
+2. Concatenates each item's `Name` and `Description` to create a single string for semantic matching.
 3. Generates embeddings for all texts and caches them in the `SmartFilterProvider`.
 4. Computes cosine similarity between each item and the query.
 5. Filters items where similarity is greater than the threshold.
 6. Orders results by similarity (most relevant first).
-7. Updates the grid data source.
+7. Updates the grid's data source.
 
 ## Run the Solution
 
 Press <kbd>F5</kbd> to run the application. If you encounter an _HTTP Error 403.14 - Forbidden_, append `/WebForm1.aspx` to the URL.
 
-- Enter a query and press <kbd>Enter</kbd> to perform a semantic search.
+- Enter a query and press <kbd>Enter</kbd> to execute a semantic search.
 - Change **Similarity Factor** to refine your search:
-    - Move toward _1_ (strict) for exact matches only. You will only see results that mean almost exactly what you typed.
+    - Move toward _1_ (strict) for exact matches only. You will only see results that nearly match what you entered.
     - Move toward _0_ (loose) to explore more options, even if they use different words.
 
 The grid refreshes automatically with filtered results ranked by similarity score.
